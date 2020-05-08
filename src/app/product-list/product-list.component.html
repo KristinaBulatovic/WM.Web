@@ -1,0 +1,50 @@
+<div class="panel panel-primary width" *ngFor="let product of products">
+
+    <div class="panel-heading">
+        {{product.name}}
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal">
+            <fieldset>
+
+                <div class="form-group">
+                    <label class="col-md-2 margin">Description:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" value={{product.description}} disabled />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 margin">Category:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" value={{categoryMapping[product.category]}}
+                            disabled />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 margin">Manufacturer:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" value={{product.manufacturer}} disabled />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 margin">Supplier:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" value={{product.supplier}} disabled />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 margin">Price:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" value={{product.price}} disabled />
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
