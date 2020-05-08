@@ -18,4 +18,8 @@ export class ProductService {
     return this.http.get<Product[]>(this.api + 'Product/GetProductsFromJSON');
   }
 
+  addProduct(product: Product) {
+    return this.http.post(this.api + 'Product/AddProduct', product, { responseType: 'text' });
+  }
+
 }

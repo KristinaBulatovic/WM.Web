@@ -1,0 +1,85 @@
+<div class="panel panel-primary width">
+    <div class="panel-heading">
+        Add products
+    </div>
+
+    <div class="panel-body">
+        <form class="form-horizontal" (ngSubmit)="addProduct(product)">
+            <fieldset>
+
+                <div class="form-group text">
+                    <label class="col-md-2 margin">Name:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" [(ngModel)]="product.name" name="taskName" />
+                    </div>
+                </div>
+
+
+                <div class="form-group text">
+                    <label class="col-md-2 margin">Description:</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" [(ngModel)]="product.description"
+                            name="description" />
+                    </div>
+                </div>
+
+                <div class="form-group text">
+                    <label class="col-md-2 margin text">Category:</label>
+
+                    <div class="col-md-8">
+                        <select class="form-control text" [(ngModel)]="product.category" name="category">
+                            <option value="{{category}}" *ngFor="let category of categories">
+                                {{categoryMapping[category]}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group text">
+                    <label class="col-md-2 margin text">Manufacturer:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" [(ngModel)]="product.manufacturer"
+                            name="manufacturer" />
+                    </div>
+                </div>
+
+                <div class="form-group text">
+                    <label class="col-md-2 margin text">Supplier:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="text" [(ngModel)]="product.supplier" name="supplier" />
+                    </div>
+                </div>
+
+                <div class="form-group text">
+                    <label class="col-md-2 margin">Price:</label>
+                    <div class="col-md-8">
+                        <input class="form-control text" type="number" [(ngModel)]="product.price" name="price" />
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <span>
+                            <button class="btn btn-primary" type="submit">
+                                Add
+                            </button>
+                        </span>
+                        <span>
+                            <button class="btn btn-default" type="button" (click)="back()">
+                                Back
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <span class="message">{{message}}</span>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>

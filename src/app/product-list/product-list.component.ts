@@ -2,6 +2,7 @@ import { CategoryMapping, Category } from './../models/category';
 import { ProductService } from './../product.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/Product';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -27,14 +28,17 @@ export class ProductListComponent implements OnInit {
   }
 
   public categoryMapping = CategoryMapping;
-  public categories = Object.values(Category);
 
   product: Product = new Product();
   products: Array<Product>;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  addProduct() {
+    this.router.navigate(['/add-edit-product']);
   }
 
 }
