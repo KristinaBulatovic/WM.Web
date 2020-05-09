@@ -18,6 +18,7 @@ export class AddEditProductComponent implements OnInit {
   headerMessage: string;
   message: string;
   showOption: number;
+  showButton: boolean;
 
   public categoryMapping = CategoryMapping;
   public categories = Object.values(Category).filter(value => typeof value === 'number');
@@ -30,9 +31,11 @@ export class AddEditProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headerMessage = this.showOption === 0 ? 'Add products to DB' : 'Add products to JSON';
-    if (this.productId > 0) {
-      this.productService.getProductForId(this.productId).subscribe(
+    if (this.productId !== 0) {
+      this.headerMessage = this.showOption === 0 ? 'Edit products to DB' : 'Edit products to JSON';
+      this.showButton = false;
+
+      this.productService.getProductForId(this.productId, this.showOption).subscribe(
         result => {
           if (result) {
             this.product.id = result.id;
@@ -45,6 +48,9 @@ export class AddEditProductComponent implements OnInit {
           }
         },
         error => console.error(error));
+    } else {
+      this.headerMessage = this.showOption === 0 ? 'Add products to DB' : 'Add products to JSON';
+      this.showButton = true;
     }
   }
 
@@ -62,7 +68,7 @@ export class AddEditProductComponent implements OnInit {
 
   editProduct(product: Product) {
     product.category = Number(product.category);
-    this.productService.editProduct(product).subscribe(
+    this.productService.editProduct(product, this.showOption).subscribe(
       data => {
         this.message = 'Success!!!';
       },

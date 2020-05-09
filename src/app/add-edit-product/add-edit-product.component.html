@@ -61,10 +61,11 @@
                 <div class="form-group">
                     <div class="col-md-4 col-md-offset-2">
                         <span>
-                            <button class="btn btn-primary" type="submit"> Add </button>
+                            <button *ngIf="showButton" class="btn btn-primary" type="submit"> Add </button>
                         </span>
                         <span>
-                            <button class="btn btn-default" type="button" (click)="editProduct(product)"> Edit </button>
+                            <button *ngIf="!showButton" class="btn btn-primary" type="button"
+                                (click)="editProduct(product)"> Edit </button>
                         </span>
                         <span>
                             <button class="btn btn-default" type="button" (click)="back()"> Back </button>

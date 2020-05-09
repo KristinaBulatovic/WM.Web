@@ -23,12 +23,14 @@ export class ProductService {
     return this.http.post(this.api + 'Product/' + url, product, { responseType: 'text' });
   }
 
-  getProductForId(productId: number) {
-    return this.http.get<Product>(this.api + 'Product/GetProductForId?productId=' + productId);
+  getProductForId(productId: number, showOption: number) {
+    const url = showOption === 0 ? 'GetProductForId' : 'GetProductForIdFromJSON';
+    return this.http.get<Product>(this.api + 'Product/' + url + '?productId=' + productId);
   }
 
-  editProduct(product: Product) {
-    return this.http.post(this.api + 'Product/EditProduct', product, { responseType: 'text' });
+  editProduct(product: Product, showOption: number) {
+    const url = showOption === 0 ? 'EditProduct' : 'EditProductToJSON';
+    return this.http.post(this.api + 'Product/' + url, product, { responseType: 'text' });
   }
 
   deleteProduct(productId: number) {
