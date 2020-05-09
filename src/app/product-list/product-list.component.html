@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="showAddBtn">
     <button class="btn btn-primary" type="submit" (click)="addProduct()">
         Add Product
     </button>
@@ -11,7 +11,7 @@
     </div>
 
     <div class="panel-body">
-        <form class="form-horizontal">
+        <form class="form-horizontal" (ngSubmit)="editProduct(product)">
             <fieldset>
 
                 <div class="form-group">
@@ -47,6 +47,14 @@
                     <label class="col-md-2 margin">Price:</label>
                     <div class="col-md-8">
                         <input class="form-control text" type="text" value={{product.price}} disabled />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4 col-md-offset-2">
+                        <span>
+                            <button class="btn btn-primary" type="submit"> Edit </button>
+                        </span>
                     </div>
                 </div>
 

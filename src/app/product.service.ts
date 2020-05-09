@@ -22,4 +22,12 @@ export class ProductService {
     return this.http.post(this.api + 'Product/AddProduct', product, { responseType: 'text' });
   }
 
+  getProductForId(productId: number) {
+    return this.http.get<Product>(this.api + 'Product/GetProductForId?productId=' + productId);
+  }
+
+  editProduct(product: Product) {
+    return this.http.post(this.api + 'Product/EditProduct', product, { responseType: 'text' });
+  }
+
 }

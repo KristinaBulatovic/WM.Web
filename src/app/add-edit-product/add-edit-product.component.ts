@@ -3,6 +3,7 @@ import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/Product';
 import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-product',
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class AddEditProductComponent implements OnInit {
   product: Product = new Product();
+  productId: number;
 
   result: string;
   message: string;
@@ -18,9 +20,26 @@ export class AddEditProductComponent implements OnInit {
   public categoryMapping = CategoryMapping;
   public categories = Object.values(Category).filter(value => typeof value === 'number');
 
-  constructor(private productService: ProductService, private location: Location) { }
+  constructor(private productService: ProductService, private location: Location, private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+      this.productId = params.id;
+    });
+  }
 
   ngOnInit(): void {
+    this.productService.getProductForId(this.productId).subscribe(
+      result => {
+        if (result) {
+          this.product.id = result.id;
+          this.product.name = result.name;
+          this.product.description = result.description;
+          this.product.category = result.category;
+          this.product.manufacturer = result.manufacturer;
+          this.product.supplier = result.supplier;
+          this.product.price = result.price;
+        }
+      },
+      error => console.error(error));
   }
 
   addProduct(product: Product) {
@@ -33,7 +52,15 @@ export class AddEditProductComponent implements OnInit {
         }
       },
       error => console.error(error));
+  }
 
+  editProduct(product: Product) {
+    product.category = Number(product.category);
+    this.productService.editProduct(product).subscribe(
+      data => {
+        this.message = 'Success!!!';
+      },
+      error => console.error(error));
   }
 
   back() {

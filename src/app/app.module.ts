@@ -27,6 +27,7 @@ import { TabViewModule } from 'primeng/tabview';
     RouterModule.forRoot([
       { path: 'product', component: ProductComponent },
       { path: 'add-edit-product', component: AddEditProductComponent },
+      { path: 'add-edit-product/:id', component: AddEditProductComponent },
       { path: '', redirectTo: 'product', pathMatch: 'full' },
       { path: '**', redirectTo: 'product', pathMatch: 'full' }
     ]),
