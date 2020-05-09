@@ -15,36 +15,42 @@ export class AddEditProductComponent implements OnInit {
   productId: number;
 
   result: string;
+  headerMessage: string;
   message: string;
+  showOption: number;
 
   public categoryMapping = CategoryMapping;
   public categories = Object.values(Category).filter(value => typeof value === 'number');
 
   constructor(private productService: ProductService, private location: Location, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-      this.productId = params.id;
+      this.showOption = Number(params.option);
+      this.productId = Number(params.id);
     });
   }
 
   ngOnInit(): void {
-    this.productService.getProductForId(this.productId).subscribe(
-      result => {
-        if (result) {
-          this.product.id = result.id;
-          this.product.name = result.name;
-          this.product.description = result.description;
-          this.product.category = result.category;
-          this.product.manufacturer = result.manufacturer;
-          this.product.supplier = result.supplier;
-          this.product.price = result.price;
-        }
-      },
-      error => console.error(error));
+    this.headerMessage = this.showOption === 0 ? 'Add products to DB' : 'Add products to JSON';
+    if (this.productId > 0) {
+      this.productService.getProductForId(this.productId).subscribe(
+        result => {
+          if (result) {
+            this.product.id = result.id;
+            this.product.name = result.name;
+            this.product.description = result.description;
+            this.product.category = result.category;
+            this.product.manufacturer = result.manufacturer;
+            this.product.supplier = result.supplier;
+            this.product.price = result.price;
+          }
+        },
+        error => console.error(error));
+    }
   }
 
   addProduct(product: Product) {
     product.category = Number(product.category);
-    this.productService.addProduct(product).subscribe(
+    this.productService.addProduct(product, this.showOption).subscribe(
       data => {
         this.result = data;
         if (this.result === 'Ok') {

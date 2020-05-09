@@ -18,8 +18,9 @@ export class ProductService {
     return this.http.get<Product[]>(this.api + 'Product/GetProductsFromJSON');
   }
 
-  addProduct(product: Product) {
-    return this.http.post(this.api + 'Product/AddProduct', product, { responseType: 'text' });
+  addProduct(product: Product, showOption: number) {
+    const url = showOption === 0 ? 'AddProduct' : 'AddProductToJSON';
+    return this.http.post(this.api + 'Product/' + url, product, { responseType: 'text' });
   }
 
   getProductForId(productId: number) {

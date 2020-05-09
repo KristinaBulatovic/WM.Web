@@ -13,14 +13,14 @@ export class ProductListComponent implements OnInit {
   @Input()
   set option(option: number) {
     if (option === 0) {
-      this.showAddBtn = true;
+      this.showOption = option;
       this.productService.getProductsFromDB().subscribe(
         result => {
           this.products = result;
         },
         error => console.error(error));
     } else if (option === 1) {
-      this.showAddBtn = false;
+      this.showOption = option;
       this.productService.getProductsFromJSON().subscribe(
         result => {
           this.products = result;
@@ -33,7 +33,7 @@ export class ProductListComponent implements OnInit {
 
   product: Product = new Product();
   products: Array<Product>;
-  showAddBtn: boolean;
+  showOption: number;
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -41,11 +41,11 @@ export class ProductListComponent implements OnInit {
   }
 
   addProduct() {
-    this.router.navigate(['/add-edit-product']);
+    this.router.navigate(['add-edit-product', this.showOption, 0]);
   }
 
   editProduct(product: Product) {
-    this.router.navigate(['/add-edit-product/' + product.id]);
+    this.router.navigate(['add-edit-product', this.showOption, product.id]);
   }
 
   deleteProduct(product: Product) {
