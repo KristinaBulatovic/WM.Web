@@ -30,4 +30,8 @@ export class ProductService {
     return this.http.post(this.api + 'Product/EditProduct', product, { responseType: 'text' });
   }
 
+  deleteProduct(productId: number) {
+    return this.http.delete(this.api + 'Product/DeleteProduct?productId=' + productId, { responseType: 'text' });
+  }
+
 }

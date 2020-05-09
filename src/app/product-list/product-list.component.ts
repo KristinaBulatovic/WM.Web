@@ -48,4 +48,12 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(['/add-edit-product/' + product.id]);
   }
 
+  deleteProduct(product: Product) {
+    this.productService.deleteProduct(product.id).subscribe(
+      result => {
+        this.products.splice(this.products.indexOf(product), 1);
+      },
+      error => console.error(error));
+  }
+
 }
