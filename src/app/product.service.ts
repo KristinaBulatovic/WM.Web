@@ -29,12 +29,13 @@ export class ProductService {
   }
 
   editProduct(product: Product, showOption: number) {
-    const url = showOption === 0 ? 'EditProduct' : 'EditProductToJSON';
+    const url = showOption === 0 ? 'EditProduct' : 'EditProductFromJSON';
     return this.http.post(this.api + 'Product/' + url, product, { responseType: 'text' });
   }
 
-  deleteProduct(productId: number) {
-    return this.http.delete(this.api + 'Product/DeleteProduct?productId=' + productId, { responseType: 'text' });
+  deleteProduct(productId: number, showOption: number) {
+    const url = showOption === 0 ? 'DeleteProduct' : 'DeleteProductFromJSON';
+    return this.http.delete(this.api + 'Product/' + url + '?productId=' + productId, { responseType: 'text' });
   }
 
 }

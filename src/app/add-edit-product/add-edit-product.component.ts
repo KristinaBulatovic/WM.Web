@@ -32,7 +32,7 @@ export class AddEditProductComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.productId !== 0) {
-      this.headerMessage = this.showOption === 0 ? 'Edit products to DB' : 'Edit products to JSON';
+      this.headerMessage = this.showOption === 0 ? 'Edit products from DB' : 'Edit products from JSON';
       this.showButton = false;
 
       this.productService.getProductForId(this.productId, this.showOption).subscribe(

@@ -49,7 +49,7 @@ export class ProductListComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
-    this.productService.deleteProduct(product.id).subscribe(
+    this.productService.deleteProduct(product.id, this.showOption).subscribe(
       result => {
         this.products.splice(this.products.indexOf(product), 1);
       },
