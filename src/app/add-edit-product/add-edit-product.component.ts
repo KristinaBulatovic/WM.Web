@@ -2,8 +2,7 @@ import { CategoryMapping, Category } from './../models/category';
 import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../models/Product';
-import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-product',
@@ -23,7 +22,7 @@ export class AddEditProductComponent implements OnInit {
   public categoryMapping = CategoryMapping;
   public categories = Object.values(Category).filter(value => typeof value === 'number');
 
-  constructor(private productService: ProductService, private location: Location, private route: ActivatedRoute) {
+  constructor(private productService: ProductService, private router: Router, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
       this.showOption = Number(params.option);
       this.productId = Number(params.id);
@@ -76,7 +75,7 @@ export class AddEditProductComponent implements OnInit {
   }
 
   back() {
-    this.location.back();
+    this.router.navigate(['product', this.showOption]);
   }
 
 }

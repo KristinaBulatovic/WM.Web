@@ -1,6 +1,6 @@
 <p-tabView (onChange)="handleChange($event)">
     <p-tabPanel header="Show products from Database"></p-tabPanel>
-    <p-tabPanel header="Show products from JSON file"></p-tabPanel>
+    <p-tabPanel [selected]="selected" header="Show products from JSON file"></p-tabPanel>
     <div>
         <app-product-list [option]="option"></app-product-list>
     </div>
