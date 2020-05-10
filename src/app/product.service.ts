@@ -20,7 +20,7 @@ export class ProductService {
 
   addProduct(product: Product, showOption: number) {
     const url = showOption === 0 ? 'AddProduct' : 'AddProductToJSON';
-    return this.http.post(this.api + 'Product/' + url, product, { responseType: 'text' });
+    return this.http.post<any>(this.api + 'Product/' + url, product);
   }
 
   getProductForId(productId: number, showOption: number) {
@@ -30,12 +30,12 @@ export class ProductService {
 
   editProduct(product: Product, showOption: number) {
     const url = showOption === 0 ? 'EditProduct' : 'EditProductFromJSON';
-    return this.http.post(this.api + 'Product/' + url, product, { responseType: 'text' });
+    return this.http.post<any>(this.api + 'Product/' + url, product);
   }
 
   deleteProduct(productId: number, showOption: number) {
     const url = showOption === 0 ? 'DeleteProduct' : 'DeleteProductFromJSON';
-    return this.http.delete(this.api + 'Product/' + url + '?productId=' + productId, { responseType: 'text' });
+    return this.http.delete<any>(this.api + 'Product/' + url + '?productId=' + productId);
   }
 
 }

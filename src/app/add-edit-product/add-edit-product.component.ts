@@ -13,11 +13,11 @@ export class AddEditProductComponent implements OnInit {
   product: Product = new Product();
   productId: number;
 
-  result: string;
   headerMessage: string;
   message: string;
   showOption: number;
   showButton: boolean;
+  isSuccess: boolean;
 
   public categoryMapping = CategoryMapping;
   public categories = Object.values(Category).filter(value => typeof value === 'number');
@@ -56,10 +56,13 @@ export class AddEditProductComponent implements OnInit {
   addProduct(product: Product) {
     product.category = Number(product.category);
     this.productService.addProduct(product, this.showOption).subscribe(
-      data => {
-        this.result = data;
-        if (this.result === 'Ok') {
+      result => {
+        if (result !== 0) {
           this.message = 'Success!!!';
+          this.isSuccess = true;
+        } else {
+          this.message = 'Failed';
+          this.isSuccess = false;
         }
       },
       error => console.error(error));
@@ -68,8 +71,14 @@ export class AddEditProductComponent implements OnInit {
   editProduct(product: Product) {
     product.category = Number(product.category);
     this.productService.editProduct(product, this.showOption).subscribe(
-      data => {
-        this.message = 'Success!!!';
+      result => {
+        if (result !== 0) {
+          this.message = 'Success!!!';
+          this.isSuccess = true;
+        } else {
+          this.message = 'Failed';
+          this.isSuccess = false;
+        }
       },
       error => console.error(error));
   }
